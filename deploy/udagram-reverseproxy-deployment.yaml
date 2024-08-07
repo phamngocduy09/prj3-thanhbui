@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: prj3-reverseproxy
+  name: prj3-reverseproxy
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        service: prj3-reverseproxy
+    spec:
+      containers:
+      - image: vikrambedi/reverseproxy
+        name: prj3-reverseproxy
+        imagePullPolicy: Always          
+        resources:
+          requests:
+            cpu: "130m"
+            memory: "160Mi"
+          limits:
+            cpu: "500m"
+            memory: "1024Mi"      
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always

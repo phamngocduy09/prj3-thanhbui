@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    service: prj3-fe
+  name: prj3-fe
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: prj3-fe
+  template:
+    metadata:
+      labels:
+        service: prj3-fe
+        api: external
+    spec:
+      containers:
+      - image: callmeket/udagram-frontend:v3
+        name: prj3-fe
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      restartPolicy: Always
