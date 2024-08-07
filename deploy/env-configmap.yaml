@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ConfigMap
 data:
-  AWS_BUCKET: quynt1-project3bucket
+  AWS_BUCKET: duypn
   AWS_PROFILE: default
-  AWS_REGION: ap-southeast-1
+  AWS_REGION: us-east-1
   JWT_SECRET: testing
   POSTGRES_DB: postgres
-  POSTGRES_HOST: project3-db.cbseuam82gm1.ap-southeast-1.rds.amazonaws.com
+  POSTGRES_HOST: database-1.clzgbttmabdx.us-east-1.rds.amazonaws.com
   URL: http://a227f2ce79e1d4684b28b9f932521be9-1461659798.ap-southeast-1.elb.amazonaws.com:8100
 metadata:
   name: env-config

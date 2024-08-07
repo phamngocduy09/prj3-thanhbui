@@ -6,22 +6,23 @@ metadata:
   name: prj3-reverseproxy
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      service: prj3-reverseproxy
   template:
     metadata:
       labels:
         service: prj3-reverseproxy
     spec:
       containers:
-      - image: vikrambedi/reverseproxy
+      - image: duypham0909/reverseproxy
         name: prj3-reverseproxy
         imagePullPolicy: Always          
         resources:
           requests:
-            cpu: "130m"
-            memory: "160Mi"
+            cpu: "150m"
           limits:
             cpu: "500m"
-            memory: "1024Mi"      
         ports:
         - containerPort: 8080
       restartPolicy: Always

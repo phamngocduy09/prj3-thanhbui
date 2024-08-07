@@ -5,7 +5,7 @@ metadata:
     service: prj3-api-user
   name: prj3-api-user
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       service: prj3-api-user
@@ -15,16 +15,14 @@ spec:
         service: prj3-api-user
     spec:
       containers:
-      - image: callmeket/udagram-api-user:v3
+      - image: duypham0909/udagram-api-user
         name: prj3-api-user
         imagePullPolicy: Always
         resources:
           requests:
-            cpu: "130m"
-            memory: "160Mi"
+            cpu: "150m"
           limits:
             cpu: "500m"
-            memory: "1024Mi"
         env:
         - name: URL
           valueFrom:
