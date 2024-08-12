@@ -35,37 +35,41 @@ export class ApiService {
   get(endpoint): Promise<any> {
     const url = `${API_HOST}${endpoint}`;
     const req = this.http.get(url, this.httpOptions).pipe(map(ApiService.extractData));
+    console.log("🚀 ~ ApiService ~ get ~ url:", url)
 
     return req
-            .toPromise()
-            .catch((e) => {
-              ApiService.handleError(e);
-              throw e;
-            });
+      .toPromise()
+      .catch((e) => {
+        ApiService.handleError(e);
+        throw e;
+      });
   }
 
   post(endpoint, data): Promise<any> {
     const url = `${API_HOST}${endpoint}`;
+    console.log("🚀 ~ ApiService ~ post ~ url:", url)
     return this.http.post<HttpEvent<any>>(url, data, this.httpOptions)
-            .toPromise()
-            .catch((e) => {
-              ApiService.handleError(e);
-              throw e;
-            });
+      .toPromise()
+      .catch((e) => {
+        ApiService.handleError(e);
+        throw e;
+      });
   }
 
   async upload(endpoint: string, file: File, payload: any): Promise<any> {
+    console.log("🚀 ~ ApiService ~ upload ~ signed_url:", endpoint)
     const signed_url = (await this.get(`${endpoint}/signed-url/${file.name}`)).url;
 
+    console.log("🚀 ~ ApiService ~ upload ~ signed_url1:", signed_url)
     const headers = new HttpHeaders({'Content-Type': file.type});
     const req = new HttpRequest( 'PUT', signed_url, file,
-                                  {
-                                    headers: headers,
-                                    reportProgress: true, // track progress
-                                  });
+      {
+        headers: headers,
+        reportProgress: true, // track progress
+      });
 
     return new Promise ( resolve => {
-        this.http.request(req).subscribe((resp) => {
+      this.http.request(req).subscribe((resp) => {
         if (resp && (<any> resp).status && (<any> resp).status === 200) {
           resolve(this.post(endpoint, payload));
         }

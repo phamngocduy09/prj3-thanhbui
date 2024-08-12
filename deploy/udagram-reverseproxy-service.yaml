@@ -2,12 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service: prj3-reverseproxy
-  name: prj3-reverseproxy
+    service: reverseproxy
+  name: reverseproxy
 spec:
   ports:
   - name: "8080"
     port: 8080
     targetPort: 8080
   selector:
-    service: prj3-reverseproxy
+    service: reverseproxy
