@@ -2,27 +2,27 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    service: api-feed
-  name: api-feed
+    service: udagram-api-user
+  name: udagram-api-user
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      service: api-feed
+      service: udagram-api-user
   template:
     metadata:
       labels:
-        service: api-feed
+        service: udagram-api-user
     spec:
       serviceAccountName: default-sa
       imagePullSecrets:
-        - name: docker-secret 
+        - name: docker-secret
       containers:
-        - image: duypham0909/udagram-api-feed:v13
+        - image: duypham0909/udagram-api-user:v13
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
-          name: api-feed
+          name: udagram-api-user
           resources:
             requests:
               memory: "64Mi"
@@ -36,21 +36,6 @@ spec:
                 configMapKeyRef:
                   name: env-config
                   key: URL
-            - name: AWS_BUCKET
-              valueFrom:
-                configMapKeyRef:
-                  name: env-config
-                  key: AWS_BUCKET
-            - name: AWS_PROFILE
-              valueFrom:
-                configMapKeyRef:
-                  name: env-config
-                  key: AWS_PROFILE
-            - name: AWS_REGION
-              valueFrom:
-                configMapKeyRef:
-                  name: env-config
-                  key: AWS_REGION
             - name: JWT_SECRET
               valueFrom:
                 configMapKeyRef:
